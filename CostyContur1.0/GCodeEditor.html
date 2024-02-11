@@ -1,0 +1,958 @@
+<script type="text/javascript" language="javascript">
+//AVERTIZARE NEIMPLEMENTAT
+var wNotImp = false;	
+
+//IE Bug Workaround
+var tipOperatieX = 0;
+var tipOperatieY = 0;
+var tipOperatieZ = 0;
+
+
+var aI					= new Array();
+var aJ					= new Array();
+var aG					= new Array();
+var aX					= new Array();
+var aY 					= new Array();
+var aZ 					= new Array();
+var Xmax				= 0;
+var Ymax				= 0;
+var Zmax				= 0;
+var Xmin				= 0;
+var Ymin				= 0;
+var XCanvasMax	= 0;
+var YCanvasMax	= 0;
+var XYZLungime	= 0;
+
+var CHUNKS		= new Array();
+
+function ia(strID) { return document.getElementById(strID); }
+
+function Reset() { ia("txtSursa").value = "" ; }
+
+function UpdateSrc(){
+var oSrc		 = ia("txtSursa");
+var oDst		 = ia("txtDestinatie");
+
+	oSrc.value = oDst.value;	
+}
+
+function toggleControls(sID, sTinta) {
+	var o = ia(sID);
+	var tinta = ia(sTinta);
+
+	if(o.checked) {
+		tinta.style.visibility = 'visible';
+	} else {
+		tinta.style.visibility = 'hidden';
+	}
+}
+
+function verificaCampurile() {
+var X = ia('idX').checked;
+var Y = ia('idY').checked;
+var Z = ia('idZ').checked;
+var valoareX 	= parseFloat( ia('valoareX').value );
+var valoareY 	= parseFloat( ia('valoareY').value );
+var valoareZ 	= parseFloat( ia('valoareZ').value );
+var nCifre 		= ia('nCifre').value;
+
+	if(X) {
+		if( isNaN(valoareX) ) { return "Valoare X ?"; }
+		if(tipOperatieX == 0) {
+			return "Operatie X ?"; 
+		} else if(tipOperatieX == "/") {
+			if(valoareX == 0) { return "X nu se poate imparte la 0"; }
+		}		
+	}
+	
+	if(Y) {
+		if( isNaN(valoareY) ) { return "Valoare Y ?"; }
+		if(tipOperatieY == 0) {
+			return "Operatie Y ?"; 
+		} else if(tipOperatieY == "/") {
+			if(valoareY == 0) { return "Y nu se poate imparte la 0"; }
+		}	
+	}
+
+	if(Z) {
+		if( isNaN(valoareZ) ) { return "Valoare	Z ?"; }
+		if(tipOperatieZ == 0) {
+			return "Operatie Z ?"; 
+		} else if(tipOperatieZ == "/") {
+			if(valoareZ == 0) { return "Z nu se poate imparte la 0"; }
+		}		
+	}
+	
+	if(nCifre!="" && isNaN(nCifre) ) { return "n cifre ?!"; }
+	
+	return false;
+}
+
+function Aplica() {
+var oSrc		 = ia("txtSursa");
+var oDst		 = ia("txtDestinatie");
+
+var btnDeseneaza = ia("btnDeseneaza");
+var btnTrimitePort  = ia("btnTrimitePort");
+
+var txtSrc		 = oSrc.value;
+var txtDst		 = "";
+	
+var X				= ia('idX').checked;
+var Y 			= ia('idY').checked;
+var Z 			= ia('idZ').checked;
+var valoareX 	= parseFloat( ia('valoareX').value );
+var valoareY 	= parseFloat( ia('valoareY').value );
+var valoareZ 	= parseFloat( ia('valoareZ').value );
+var nCifre		= parseInt( ia('nCifre').value);
+var bFloat		= ia('bFloat').checked;
+
+var iCifre			= 0;
+var iPos			= 0;
+var i 					= 0;
+var iXYZ			= new Array(); 
+	 iXYZ[0]			= false;
+	 iXYZ[1]			= 0;
+var NLpos 			= 0;
+var NLreplacer	= "<br />";
+var chunk 			= "";
+var chunkLeft		= ""
+var chunkRight	= ""
+var buffer			= "";
+var tempG			= "";
+var tempI			= "";
+var tempJ			= "";
+var tempX 			= "";
+var tempY 		= "";
+var tempZ 			= "";
+var iG				= -1;
+var iI					= -1;
+var iJ					= -1;
+var iX				= -1;
+var iY				= -1;
+var iZ				= -1;
+var i0				= 0;
+var j0				= 0;
+var x0				= 0;
+var y0				= 0;
+var z0				= 0;
+var XYZstart 		= 0;
+var XYZstop 		= -1;
+
+var lungime		= 0;
+
+	if( verificaCampurile() ) { alert( verificaCampurile() ); return; }
+
+	txtSrc = txtSrc.replace(/x/g, "X");
+	txtSrc = txtSrc.replace(/y/g, "Y");
+	txtSrc = txtSrc.replace(/z/g, "Z");
+	txtSrc = txtSrc.replace(/i/g, "I");	
+	txtSrc = txtSrc.replace(/j/g, "J");	
+	
+	txtSrc = txtSrc.replace(/\n\r?/g, NLreplacer);
+
+	txtSrc = txtSrc.replace(/X\./g, "X0.");
+	txtSrc = txtSrc.replace(/X\-\./g, "X-0.");
+	txtSrc = txtSrc.replace(/Y\./g, "Y0.");
+	txtSrc = txtSrc.replace(/Y\-\./g, "Y-0.");
+	txtSrc = txtSrc.replace(/Z\./g, "Z0.");
+	txtSrc = txtSrc.replace(/Z\-\./g, "Z-0.");
+	txtSrc = txtSrc.replace(/I\./g, "I0.");
+	txtSrc = txtSrc.replace(/I\-\./g, "I-0.");
+	txtSrc = txtSrc.replace(/J\./g, "J0.");	
+	txtSrc = txtSrc.replace(/J\-\./g, "J-0.");	
+			
+	//============================
+	// DE CONTINUAT DE IMPLEMENTAT
+	//============================
+
+	//alert(txtSrc);
+	
+	aX = null; aX = new Array();
+	aY = null; aY = new Array();
+	aZ = null; aZ = new Array();
+	CHUNKS 	= null; CHUNKS = new Array();
+	
+	txtSrc = txtSrc + NLreplacer;
+	while (iPos >=0) {
+		NLpos = txtSrc.indexOf(NLreplacer);
+		chunk = txtSrc.substring(0,NLpos);
+		txtSrc = txtSrc.substring( (NLpos + NLreplacer.length) ,txtSrc.length);
+		//alert(NLpos + " / " + txtSrc);
+		//alert(iPos + " / " + NLpos);
+
+		XYZstart = -1;
+
+		iG = chunk.indexOf("G");
+		tempG = "";
+		if( iG >=0 ) {
+			i=1;
+			for(i==1; chunk.charAt( (iG + i) ) != " " && chunk.charAt( (iG + i) ) != undefined && chunk.charAt( (iG + i) ) != ""; i++) { 
+				//alert( chunk.charAt( (iI + i) ) );
+				tempG += chunk.charAt( (iG + i) ).toString();
+			}
+		
+			if( tempG.length != 2) {
+				alert("Numarul de cifre pentru G difera de 2!\n\nLinine: " + (iPos+1) + "\n\nAbandonam...");
+				return;
+			}
+			
+			tempG = parseInt(tempG);
+
+			if( isNaN(tempG) ) {
+				alert("G nu are valoare numar!\n\nLinie: " + (iPos+1) + "\n\nAbandonam...");
+			}
+			
+			if( tempG < 0 ) {
+				alert("G < 0 !\n\nLinine: " + (iPos+1) + "\n\nAbandonam...");
+				return;
+			} else if( tempG==2 || tempG==3  ) {
+				if( !wNotImp) {
+					alert("NU ESTE IMPLEMENTAT INCA!\n\nG > 3 !\n\nLinine: " + (iPos+1) + "\n\nAbandonam...");
+					wNotImp = true;
+					return;
+				}
+			} else if( tempG > 3  ) {
+				if( !wNotImp) {
+					alert("G > 3, ignoram...");
+					wNotImp = true;
+				}
+			}
+			
+			if( iXYZ[0]==false ) { iXYZ[0] = true; }
+			aG[ iXYZ[1] ] = parseInt(tempG);
+		
+			/*
+			if( tempZ < 0 ) {
+				alert("Z negativ : " + tempZ + "\nLinie : " + (iPos+	1) + "\n\nTerminare operatie");
+				return;
+			}
+			*/
+			
+			tempG = " G" + tempG;
+			
+		}		
+		
+		
+		iI = chunk.indexOf("I");
+		tempI = "";
+		aI[ iXYZ[1] ] = "gol";
+		if( iI >=0 ) {
+			i=1;
+			for(i==1; chunk.charAt( (iI + i) ) != " " && chunk.charAt( (iI + i) ) != undefined && chunk.charAt( (iI + i) ) != ""; i++) { 
+				//alert( chunk.charAt( (iI + i) ) );
+				tempI += chunk.charAt( (iI + i) ).toString();
+			}
+
+			tempI = parseFloat(tempI);
+			
+			if( isNaN(tempI) ) {
+				alert("I nu are valoare numar!\n\nLinie: " + (iPos+1) + "\n\nAbandonam...");
+			}
+			
+			if(X) {
+				if(tipOperatieX == "+") {
+					tempI += valoareX;
+				} else if(tipOperatieX == "-") {
+					tempI -= valoareX;
+				} else if(tipOperatieX == "*") {
+					tempI *= valoareX;
+				} else if(tipOperatieX == "/") {
+					tempI /= valoareX;
+				}
+			}
+
+			if( iXYZ[0]==false ) { iXYZ[0] = true; }
+			aI[ iXYZ[1] ] = tempI;
+		
+			/*
+			if( tempZ < 0 ) {
+				alert("Z negativ : " + tempZ + "\nLinie : " + (iPos+	1) + "\n\nTerminare operatie");
+				return;
+			}
+			*/
+
+			if( !isNaN(nCifre) && nCifre>0 ) {	
+				tempI = parseInt(tempI);			
+				tempI = tempI.toString();
+				
+				if(tempI.length < nCifre) {
+					i0 = 0; buffer = "";
+					for( i0==0; i0<(nCifre - tempI.length); i0++ ) {
+						buffer += "0";
+					}
+
+					tempI = buffer + tempI;
+						
+				} else {
+					tempI = tempI.substring(0, nCifre);
+				}
+				
+			} else {
+				if( !bFloat ) { tempI = parseInt(tempI); }		
+			}
+			
+			tempI = " I" + tempI;
+			
+		}
+	
+
+		iJ = chunk.indexOf("J");
+		aJ[ iXYZ[1] ] = "gol";
+		tempJ = "";
+		if( iJ >=0 ) {
+			i=1;
+			for(i==1; chunk.charAt( (iJ + i) ) != " " && chunk.charAt( (iJ + i) ) != undefined && chunk.charAt( (iJ + i) ) != ""; i++) { 
+				//alert( chunk.charAt( (iJ + i) ) );
+				tempJ += chunk.charAt( (iJ + i) ).toString();
+			}
+
+			tempJ = parseFloat(tempJ);
+
+			if( isNaN(tempJ) ) {
+				alert("J nu are valoare numar!\n\nLinie: " + (iPos+1) + "\n\nAbandonam...");
+			}
+			
+			if(Y) {
+				if(tipOperatieY == "+") {
+					tempJ += valoareY;
+				} else if(tipOperatieY == "-") {
+					tempJ -= valoareY;
+				} else if(tipOperatieY == "*") {
+					tempJ *= valoareY;
+				} else if(tipOperatieY == "/") {
+					tempJ /= valoareY;
+				}
+			}
+
+			if( iXYZ[0]==false ) { iXYZ[0] = true; }
+			aJ[ iXYZ[1] ] = tempJ;
+		
+			/*
+			if( tempZ < 0 ) {
+				alert("Z negativ : " + tempZ + "\nLinie : " + (iPos+	1) + "\n\nTerminare operatie");
+				return;
+			}
+			*/
+
+			if( !isNaN(nCifre) && nCifre>0 ) {	
+				tempJ = parseInt(tempJ);			
+				tempJ = tempJ.toString();
+				
+				if(tempJ.length < nCifre) {
+					j0 = 0; buffer = "";
+					for( j0==0; j0<(nCifre - tempJ.length); i0++ ) {
+						buffer += "0";
+					}
+
+					tempJ = buffer + tempJ;
+						
+				} else {
+					tempJ = tempJ.substring(0, nCifre);
+				}
+				
+			} else {
+				if( !bFloat ) { tempJ = parseInt(tempJ); }		
+			}
+			
+			tempJ = " J" + tempJ;
+			
+		}
+	
+	
+		iX = chunk.indexOf("X");
+		tempX = "";
+		if( iX >=0 ) {
+			i=1;
+			for(i==1; chunk.charAt( (iX + i) ) != " " && chunk.charAt( (iX + i) ) != undefined && chunk.charAt( (iX + i) ) != ""; i++) { 
+				//alert( chunk.charAt( (iX + i) ) );
+				tempX += chunk.charAt( (iX + i) ).toString();
+			}
+
+			tempX = parseFloat(tempX);
+
+			if( isNaN(tempX) ) {
+				alert("X nu are valoare numar!\n\nLinie: " + (iPos+1) + "\n\nAbandonam...");
+			}
+			
+			if(X) {
+				if(tipOperatieX == "+") {
+					tempX += valoareX;
+				} else if(tipOperatieX == "-") {
+					tempX -= valoareX;
+				} else if(tipOperatieX == "*") {
+					tempX *= valoareX;
+				} else if(tipOperatieX == "/") {
+					tempX /= valoareX;
+				}
+			}
+			
+			
+			if( iXYZ[0]==false ) { iXYZ[0] = true; }
+			aX[ iXYZ[1] ] = tempX;
+		
+			/*
+			if( tempX < 0 ) {
+				alert("X negativ : " + tempX + "\nLinie : " + (iPos+1) + "\n\nTerminare operatie");
+				return;
+			}		
+			*/
+			
+			if( !isNaN(nCifre) && nCifre>0 ) {					
+				tempX = parseInt(tempX);
+				tempX = tempX.toString();
+				
+				if(tempX.length < nCifre) {
+					x0 = 0; buffer = "";
+					for( x0==0; x0<(nCifre - tempX.length); x0++ ) {
+						buffer += "0";
+					}
+
+					tempX = buffer + tempX;
+			
+					//alert('buffer= ' + buffer + " | tempX = " + tempX);
+						
+				} else {
+					tempX = tempX.substring(0, nCifre);
+				}
+			
+			} else {
+				if( !bFloat ) { tempX = parseInt(tempX); }
+			}
+			
+			tempX = " X" + tempX;
+			
+		}
+		
+
+		iY = chunk.indexOf("Y");
+		tempY = "";
+		if( iY >=0 ) {
+			i=1;
+			for(i==1; chunk.charAt( (iY + i) ) != " " && chunk.charAt( (iY + i) ) != undefined && chunk.charAt( (iY + i) ) != ""; i++) { 
+				//alert( chunk.charAt( (iY + i) ) );
+				tempY += chunk.charAt( (iY + i) ).toString();
+			}
+
+			tempY = parseFloat(tempY);
+			
+			if( isNaN(tempY) ) {
+				alert("Y nu are valoare numar!\n\nLinie: " + (iPos+1) + "\n\nAbandonam...");
+			}
+			
+			if(Y) {				
+				if(tipOperatieY == "+") {
+					tempY += valoareY;
+				} else if(tipOperatieY == "-") {
+					tempY -= valoareY;
+				} else if(tipOperatieY == "*") {
+					tempY *= valoareY;
+				} else if(tipOperatieY == "/") {
+					tempY /= valoareY;
+				}
+			}
+			
+			if( iXYZ[0]==false ) { iXYZ[0] = true; }
+			aY[ iXYZ[1] ] = tempY;
+		
+			/*
+			if( tempY < 0 ) {
+				alert("Y negativ : " + tempY + "\nLinie : " + (iPos+1) + "\n\nTerminare operatie");
+				return;
+			}
+			*/
+	
+			if( !isNaN(nCifre) && nCifre>0 ) {
+				tempY = parseInt(tempY);
+				tempY = tempY.toString();
+				
+				if(tempY.length < nCifre) {
+					y0 = 0; buffer = "";
+					for( y0==0; y0<(nCifre - tempY.length); y0++ ) {
+						buffer += "0";
+					}
+
+					tempY = buffer + tempY;
+			
+					//alert('buffer= ' + buffer + " | tempY = " + tempY);
+						
+				} else {
+					tempY = tempY.substring(0, nCifre);
+				}
+				
+			} else {
+				if( !bFloat ) { tempY = parseInt(tempY); }
+			}
+			
+			tempY = " Y" + tempY;
+			
+		}
+
+
+		iZ = chunk.indexOf("Z");
+		tempZ = "";
+		if( iZ >=0 ) {
+			i=1;
+			for(i==1; chunk.charAt( (iZ + i) ) != " " && chunk.charAt( (iZ + i) ) != undefined && chunk.charAt( (iZ + i) ) != ""; i++) { 
+				//alert( chunk.charAt( (iZ + i) ) );
+				tempZ += chunk.charAt( (iZ + i) ).toString();
+			}
+
+			tempZ = parseFloat(tempZ);
+
+			if( isNaN(tempZ) ) {
+				alert("Z nu are valoare numar!\n\nLinie: " + (iPos+1) + "\n\nAbandonam...");
+			}
+			
+			if(Z) {
+				if(tipOperatieZ == "+") {
+					tempZ += valoareZ;
+				} else if(tipOperatieZ == "-") {
+					tempZ -= valoareZ;
+				} else if(tipOperatieZ == "*") {
+					tempZ *= valoareZ;
+				} else if(tipOperatieZ == "/") {
+					tempZ /= valoareZ;
+				}
+			}
+
+			if( iXYZ[0]==false ) { iXYZ[0] = true; }
+			aZ[ iXYZ[1] ] = tempZ;
+		
+			/*
+			if( tempZ < 0 ) {
+				alert("Z negativ : " + tempZ + "\nLinie : " + (iPos+	1) + "\n\nTerminare operatie");
+				return;
+			}
+			*/
+
+			if( !isNaN(nCifre) && nCifre>0 ) {	
+				tempZ = parseInt(tempZ);			
+				tempZ = tempZ.toString();
+				
+				if(tempZ.length < nCifre) {
+					z0 = 0; buffer = "";
+					for( z0==0; z0<(nCifre - tempZ.length); z0++ ) {
+						buffer += "0";
+					}
+
+					tempZ = buffer + tempZ;
+						
+				} else {
+					tempZ = tempZ.substring(0, nCifre);
+				}
+				
+			} else {
+				if( !bFloat ) { tempZ = parseInt(tempZ); }		
+			}
+			
+			tempZ = " Z" + tempZ;
+			
+		}
+		
+		if( iXYZ[0]==true ) { iXYZ[1]++; }
+		
+		if( iX==-1 && iY==-1 && iZ==-1 && iI==-1 && iJ==-1 ) {
+			XYZstart = -1;
+		} else {
+			XYZstop = Math.max(iX , iY , iZ);
+			
+			if(iX == -1) iX = 10000;
+			if(iY == -1) iY = 10000;
+			if(iZ == -1) iZ  = 10000;
+			if(iI == -1) iI  = 10000;
+			if(iJ == -1) iJ  = 10000;
+			
+			XYZstart = Math.min(iX , iY , iZ, iI, iJ);
+		
+			if( XYZstart == iX ) {
+				//alert(tempX);
+				if(tempX != "") {
+					if( chunk.charAt(iX-1) == " " ) { tempX = tempX.substring(1, tempX.length); }
+				}	
+			} else if( XYZstart == iY ) {
+				if(tempY != "") {
+					if( chunk.charAt(iY-1) == " " ) { tempY = tempY.substring(1, tempY.length); }
+				}
+			} else if( XYZstart == iZ ) {
+				if(tempZ != ""){
+					if( chunk.charAt(iZ-1) == " " ) { tempZ = tempZ.substring(1, tempZ.length); }
+				}	
+			} else if( XYZstart == iI ) {
+				if(tempI != ""){
+					if( chunk.charAt(iI-1) == " " ) { tempI = tempI.substring(1, tempI.length); }
+				}	
+			} else if( XYZstart == iJ ) {
+				if(tempJ != ""){
+					if( chunk.charAt(iJ-1) == " " ) { tempJ = tempJ.substring(1, tempJ.length); }
+				}	
+			}
+			
+			chunkLeft = chunk.substring(0, XYZstart);		
+
+			i=1; chunkRight = XYZstop+1;
+			for(i==1; chunk.charAt( (XYZstop + i) )!=" " && chunk.charAt( (XYZstop + i) )!=undefined && chunk.charAt( (XYZstop + i) )!=""; i++) { 
+				chunkRight++;
+			}
+			chunkRight = chunk.substring(chunkRight, chunk.length);
+			
+			chunk = chunkLeft + tempX + tempY + tempZ + tempI + tempJ + chunkRight; 
+		}
+		
+		if(NLpos < 0) {
+			iPos=-1;
+		} else {
+			iPos++;
+			CHUNKS.push(chunk);
+			if(chunk.length > 0) { 
+				txtDst += chunk + "\n";
+			} // alert(chunk+ " " + tempX); }
+		}
+		
+
+	}
+	
+	
+	
+	//STANDARDIZEAZA coordonatele
+	lungime = aZ.length; buffer = "";
+	for(i=0; i<lungime; i++) {
+		if( !isNaN(aZ[i]) ) { buffer += aZ[i] + ","; }
+	}
+	buffer = buffer.substring(0, buffer.length-1);
+	buffer = eval("Math.max(" + buffer + ")");
+	if( buffer == Infinity ) {
+		aZ[0] = 0;
+		Zmax = 0;
+	} else {
+		Zmax = buffer;
+	}
+
+	lungime = aX.length; buffer = "";
+	for(i=0; i<lungime; i++) {
+		if( !isNaN(aX[i]) ) { buffer += aX[i] + ","; }
+	}
+	buffer = buffer.substring(0, buffer.length-1);
+	
+	Xmax = eval("Math.max(" + buffer + ")");
+	if( Xmax == Infinity ) {
+		Xmax = 0;
+	}
+	Xmin = eval("Math.min(" + buffer + ")");
+	if( Xmin == Infinity ) {
+		Xmin = 0;
+	}	
+	
+	
+	lungime = aY.length; buffer = "";
+	for(i=0; i<lungime; i++) {
+		if( !isNaN(aY[i]) ) { buffer += aY[i] + ","; }
+	}
+	buffer = buffer.substring(0, buffer.length-1);
+
+	Ymax = eval("Math.max(" + buffer + ")");
+	if( Ymax == Infinity ) {
+		Ymax = 0;
+	}
+	Ymin = eval("Math.min(" + buffer + ")");
+	if( Ymin == Infinity ) {
+		Ymin = 0;
+	}	
+	
+	XYZLungime = Math.max(aX.length, aY.length, aZ.length)-1;
+
+	XCanvasMax = Xmax - Xmin;
+	YCanvasMax = Ymax - Ymin;
+	
+	lungime = XYZLungime;
+	if( aG[0]==undefined ) { aG[0] = 0; }
+	if( aI[0]==undefined ) { aI[0] = 0; }
+	if( aJ[0]==undefined ) { aJ[0] = 0; }
+	if( aX[0]==undefined ) { aX[0] = 0; }
+	if( aY[0]==undefined ) { aY[0] = 0; }
+	for(i=0; i<=lungime; i++) {
+
+		if( aG[i]==undefined && i>0 ) {
+			aG[i] = aG[i-1];
+			aG[i] = parseInt(aG[i]);
+		}	
+	
+		if( aI[i]==undefined && i>0 ) {
+			aI[i] = aI[i-1];
+			aI[i] = parseInt(aI[i]);
+		}
+
+		if( aJ[i]==undefined && i>0 ) {
+			aJ[i] = aJ[i-1];
+			aJ[i] = parseInt(aJ[i]);
+		}
+		
+		if( aX[i]==undefined && i>0 ) {
+			aX[i] = aX[i-1];
+			aX[i] = parseInt(aX[i]);
+		}
+		//aX[i] = aX[i] + 10;
+
+		if( aY[i]==undefined && i>0 ) {
+			aY[i] = aY[i-1];
+			aY[i] = parseInt(aY[i]);
+		}
+		//aY[i] = aY[i] + 10;
+		
+		if( aZ[i]==undefined && i>0 ) {
+			aZ[i] = aZ[i-1];
+			//aZ[i] = parseInt(aZ[i]);
+		}	
+		//alert(i + " , " + aX[i] + " , " + aY[i] + " , " + aX[i+1] + " , " + aY[i+1]);	
+	}
+
+	
+	//SCRIE REZULTATUL
+	//alert(aX);
+	txtDst = txtDst.substring(0 , txtDst.length - 1);
+	oDst.value = txtDst;
+}
+
+
+function Deseneaza() {
+var oD			= ia("desen");
+var o;
+var lungime;
+var xmin	= 0-Xmin;
+try{
+	o = oD.getContext("2d");
+} catch(e) {
+	alert('Browserul dumneavoastra nu suporta CANVAS!...Abandonare');
+	return;
+}
+	
+	//DESENEAZA NORMAL
+	ArataDesen("<font size='5'>" + (XYZLungime+1) + " linii</font>");
+	//ReseteazaDesen();
+	
+	lungime = XYZLungime;
+	for(i=0; i<lungime; i++) {
+		if(aZ[i]<Zmax) {
+			//console.log( "aZ=" + (aZ[i]) + " , Zmax=" + (Zmax) ); 
+			//console.log( "X=" + (aX[i] + xmin) + " , Y=" + (Ymax - aY[i] ) ); 
+			
+			if( aG[i]==2 || aG[i]==3 ){
+				//o.arc(x,y,radius,startAngle,endAngle, clockwise);
+			} else {
+				o.moveTo(aX[i] + xmin, Ymax - aY[i]);
+				o.lineTo(aX[i+1] + xmin, Ymax - aY[i+1]);
+				o.stroke();				
+			}
+			
+		}
+	}
+
+	
+}
+
+
+function ReseteazaDesen() {
+var oW			= ia('desenWrapper');
+var oD			= ia("desen");
+var o;
+
+	try{
+		o = oD.getContext("2d");
+	} catch(e) {
+		alert('Browser-ul nu suporta CANVAS! Desenul nu poate fi afisat...');
+		return;
+	}
+		
+	if( XCanvasMax <= 1 ) {
+		oD.width = 10;
+		oW.style.width = "200px";
+	} else {
+		oD.width = XCanvasMax;
+		
+		if( (oD.width+200) < 400 ) {
+			oW.style.width = "400px";
+		} else { 
+			oW.style.width = (oD.width+200) + "px";
+		}
+	}
+
+	if( YCanvasMax <= 1 ) {
+		oD.height = 10;
+		oW.style.height = "200px";	
+	} else {
+		oD.height = YCanvasMax;
+		
+		if( (oD.height+200) < 400 ) {
+			oW.style.height = "400px";
+		} else { 
+			oW.style.height = (oD.height+200) + "px";
+		}
+	}
+
+	
+	o.beginPath();
+	o.fillStyle="#EFFBF2";
+	o.fillRect(0,0, oD.width , oD.height);
+}
+
+function ArataDesen(sTitlu) {
+var oW = ia('desenWrapper');
+var oT  = ia('desenText');
+
+	ReseteazaDesen();
+
+	if( isNaN( parseInt(oW.style.width)) ) {
+		if( XCanvasMax <= 1 ) {
+			oW.style.width = "100px";
+		} else {
+			oW.style.width = (ia("desen").width+200) + "px";
+		}		
+	}
+
+	if( XCanvasMax > screen.width - 50 ) {
+		oW.style.left = "0px";
+	} else {
+		oW.style.left = ((screen.width - parseInt(oW.style.width) ) / 2) + "px";		
+	}
+
+
+	if( isNaN( parseInt(oW.style.height)) ) {
+		if( YCanvasMax <= 1 ) {
+			oW.style.height = "100px";
+		} else {
+			oW.style.height = (ia("desen").height+200) + "px";
+		}		
+	}
+
+	if( YCanvasMax > screen.height - 50 ) {
+		oW.style.top = "0px";
+	} else {
+		oW.style.top = ((screen.height - 140 - parseInt(oW.style.height) ) / 2) + "px";		
+	}
+		
+
+	
+	oT.innerHTML = sTitlu;
+}
+
+function AscundeDesen() {
+	var oW		= ia('desenWrapper');
+	
+	oW.style.left = "-4000px";
+	oW.style.top = "-4000px";
+}
+
+
+function ToggleFloater() {
+var nCifre = parseInt( ia('nCifre').value );
+var oFloater = ia('bFloat');
+
+	if( !isNaN(nCifre) && nCifre>0 ) {	
+		oFloater.disabled = true;
+	} else {
+		oFloater.disabled = false;
+	}
+	
+}
+</script>
+
+<table align="center">
+<tr>
+	<th align="center" colspan="2">
+		<h3><code> M.G. editor  v0.9</code></h3> 
+		<hr width="100%" color="black" />
+	</th>
+</tr>
+<tr>
+
+	<td align="center" colspan="2">
+		<div style="float:left">
+			<input type="checkbox" id="idX" onClick="javascript:toggleControls('idX' , 'controlX')" /> <font size="5"><b>X</b></font>
+			<br />
+			<div id="controlX">		
+				<input type="radio" name="tipOperatieX" onClick="tipOperatieX = '+'" />+
+				<input type="radio" name="tipOperatieX" onClick="tipOperatieX = '-'" />-
+				<input type="radio" name="tipOperatieX" onClick="tipOperatieX = '*'" />*
+				<input type="radio" name="tipOperatieX" onClick="tipOperatieX = '/'" />/
+				<br />
+				<input type="text" id="valoareX" style="margin-bottom:10px"/>
+			</div>
+		</div>
+		
+		<div style="float:left; margin-left:2px">
+			<input type="checkbox" id="idY" onClick="javascript:toggleControls('idY' , 'controlY')" /> <font size="5"><b>Y</b></font>
+			<br />
+			<div id="controlY">			
+				<input type="radio" name="tipOperatieY" onClick="tipOperatieY = '+'"  value="+" />+
+				<input type="radio" name="tipOperatieY" onClick="tipOperatieY = '-'"  value="-" />-
+				<input type="radio" name="tipOperatieY" onClick="tipOperatieY = '*'"  value="*" />*
+				<input type="radio" name="tipOperatieY" onClick="tipOperatieY = '/'"  value="/" />/
+				<br />
+				<input type="text" id="valoareY" style="margin-bottom:10px" />
+			</div>
+		</div>
+
+		<div style="float:left; margin-left:2px">
+			<input type="checkbox" id="idZ" onClick="javascript:toggleControls('idZ' , 'controlZ')"/><font size="5"><b>Z</b></font>
+			<br />
+			<div id="controlZ">
+				<input type="radio" name="tipOperatieZ" onClick="tipOperatieZ = '+'" value="+" />+
+				<input type="radio" name="tipOperatieZ" onClick="tipOperatieZ = '-'"  value="-" />-
+				<input type="radio" name="tipOperatieZ" onClick="tipOperatieZ = '*'"  value="*" />*
+				<input type="radio" name="tipOperatieZ" onClick="tipOperatieZ = '/'"  value="/" />/
+				<br />
+				<input type="text" id="valoareZ" style="margin-bottom:10px" />
+			</div>
+		</div>
+			
+		<div style="float:left; margin-left:7px; height:84px">
+			<div align="left" style="width:50px; margin-top:30px">
+				<b>n cifre</b>
+				<input type="text" id="nCifre" style="width:40px" onKeyUp="javascript:ToggleFloater()" />
+			</div>
+		</div>
+	
+		<div style="clear:both"></div>
+
+		<div align="center" style="margin-top:10px">
+			<input type="checkbox" id="bFloat" /><b>Virgula mobila (float)</b> 
+		</div>
+	
+		<div style="clear:both; margin-bottom:10px"></div>
+	
+		<input type="button" value="Reseteaza" onClick="javascript:Reset()"  style="width:140px; height:30px" />
+		<input type="button" id="btnDeseneaza" value="Deseneaza" onClick="javascript:Aplica(); Deseneaza()" style="width:140px; height:30px" />
+		
+		<br />
+		<hr width="100%" color="black" />	
+	</td>
+</tr>
+<tr>
+	<td>
+		<div style="float:left">
+			<font size="5">SURSA</font> <code>(G-Code)</code>
+			<br />
+			<textarea id="txtSursa" style="width:240px; height:220px"></textarea>
+		</div>
+		
+		<div style="float:left; margin-top:100px">
+			<input type="button" value="<--" onClick="javascript:UpdateSrc()" />
+			<br /><br />
+			<input type="button" value="=>" onClick="javascript:Aplica()" />
+		</div>
+	</td>
+	<td>
+		<font size="5">DESTINATIE</font> <code>(rezultat)</code>
+		
+		<br />
+		<textarea id="txtDestinatie" style="width:240px; height:220px"></textarea>	
+	</td>
+</tr>
+</table>
+
+<div id="desenWrapper" style="position:absolute; background-color:white; left:-1000px; top:-1000px; width:800px; height:500px; border:1px solid black" align="center"> 
+	<input type="button" value="[ X ]" onClick="javascript:AscundeDesen()" />
+	<br />
+	<div id="desenText">n Linii</div>
+	<canvas id="desen" style="position:relative; margin:10px"></canvas>
+</div>
