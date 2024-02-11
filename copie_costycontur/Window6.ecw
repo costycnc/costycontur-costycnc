@@ -1,0 +1,651 @@
+;Do not modify this file!!!
+Easy Code
+Begin Window = Window6
+  AlignMode       = 0
+  AutoRedraw      = 1
+  BackColor       = 0x8000000F
+  Border          = 3
+  Caption         = 1
+  CenterWindow    = 2
+  ClientEdge      = 0
+  ClipChildren    = 1
+  ClipSiblings    = 1
+  ContextHelp     = 0
+  ControlMenu     = 1
+  CursorIcon      = [None]
+  CursorShape     = 0
+  DisableClose    = 0
+  DrawingStyle    = 0
+  DrawingWidth    = 1
+  Enabled         = 1
+  ExStyle         = 0x00040100
+  Font            = MS Sans Serif,8,400,0,0,0
+  ForeColor       = 0x80000012
+  Height          = 453
+  IconBig         = [None]
+  IconSmall       = [None]
+  ImageType       = -1
+  KeepSize        = 0
+  Left            = 0
+  MaximizeBox     = 0
+  MDIChild        = 0
+  Menu            = 500
+  MenuString      = 0,Fisier,,,0,0,0|1,Activeaza camera        F5,MNUACTIVEAZA,,0,0,0|1,Inchide camera            F7,MNUCLOSE,,0,1,0|1,-,,,0,0,0|1,Inchide [ x ]                 Shift + Esc,MNUINCHIDE,,0,0,0|0,Edit,,,0,0,0|1,Salveaza *.bmp            F2,MNUSAVE,,0,1,0|1,-,,,0,0,0|1,Trimite la prelucrare      F1,MNUSEND2MAIN,,0,1,0|0,Setari,,,0,0,0|1,Seteaza director bmp    F12,MNUSETSAVEPATH,,0,0,0|1,-,,,0,0,0|1,Seteaza camera             F8,MNUSETCAMERASETTINGS,,0,1,0|0,Info,,,0,0,0|1,./tCam.bmp,MNUSAVEFILE,,1,0,0
+  MinimizeBox     = 0
+  NormalStyle     = 0x56CC0000
+  Picture         = [None]
+  RightToLeft     = 0
+  ScaleMode       = 0
+  ScrollBars      = 0
+  ShowMode        = 0
+  Style           = 0
+  Text            = Costy WebCamera editor 0.1
+  TimerInterval   = 0
+  ToolTip         = 0
+  ToolWindow      = 0
+  Top             = 0
+  Visible         = 1
+  Width           = 498
+  Begin Button = btnClose
+    BackColor       = 0x8000000F
+    Border          = 0
+    Cancel          = 0
+    ClientEdge      = 0
+    ClipSiblings    = 1
+    CursorIcon      = [None]
+    CursorShape     = 0
+    Default         = 0
+    DragAndDrop     = 1002
+    DrawFocus       = 1
+    Enabled         = 0
+    ExStyle         = 0x00000000
+    Font            = MS Sans Serif,8,400,0,0,0
+    ForeColor       = 0x80000012
+    Height          = 44
+    ImageType       = -1
+    Left            = 55
+    MultiLine       = 0
+    OwnerDraw       = 0
+    NormalStyle     = 0x54000300
+    Picture         = [None]
+    PicturePosition = 0
+    RightToLeft     = 0
+    StaticEdge      = 0
+    TabOrder        = 3
+    TabStop         = 1
+    Text            = !
+    ToolTipText     = 
+    Top             = 5
+    Visible         = 1
+    Width           = 48
+  End
+  Begin Button = btnActiveaza
+    BackColor       = 0x8000000F
+    Border          = 0
+    Cancel          = 0
+    ClientEdge      = 0
+    ClipSiblings    = 1
+    CursorIcon      = [None]
+    CursorShape     = 0
+    Default         = 0
+    DragAndDrop     = 1002
+    DrawFocus       = 1
+    Enabled         = 1
+    ExStyle         = 0x00000000
+    Font            = MS Sans Serif,8,400,0,0,0
+    ForeColor       = 0x80000012
+    Height          = 44
+    ImageType       = -1
+    Left            = 4
+    MultiLine       = 0
+    OwnerDraw       = 0
+    NormalStyle     = 0x54000300
+    Picture         = [None]
+    PicturePosition = 0
+    RightToLeft     = 0
+    StaticEdge      = 0
+    TabOrder        = 2
+    TabStop         = 1
+    Text            = >
+    ToolTipText     = 
+    Top             = 5
+    Visible         = 1
+    Width           = 48
+  End
+  Begin Button = btnSend2Main
+    BackColor       = 0x8000000F
+    Border          = 0
+    Cancel          = 0
+    ClientEdge      = 0
+    ClipSiblings    = 1
+    CursorIcon      = [None]
+    CursorShape     = 0
+    Default         = 0
+    DragAndDrop     = 1000
+    DrawFocus       = 1
+    Enabled         = 0
+    ExStyle         = 0x00000000
+    Font            = MS Sans Serif,8,400,0,0,0
+    ForeColor       = 0x80000012
+    Height          = 44
+    ImageType       = -1
+    Left            = 230
+    MultiLine       = 0
+    OwnerDraw       = 0
+    NormalStyle     = 0x54000300
+    Picture         = [None]
+    PicturePosition = 0
+    RightToLeft     = 0
+    StaticEdge      = 0
+    TabOrder        = 1
+    TabStop         = 1
+    Text            = Trimite la prelucrat (F1)
+    ToolTipText     = 
+    Top             = 5
+    Visible         = 1
+    Width           = 147
+  End
+  Begin Button = btnSave
+    BackColor       = 0x8000000F
+    Border          = 0
+    Cancel          = 0
+    ClientEdge      = 0
+    ClipSiblings    = 1
+    CursorIcon      = [None]
+    CursorShape     = 0
+    Default         = 0
+    DragAndDrop     = 1000
+    DrawFocus       = 1
+    Enabled         = 0
+    ExStyle         = 0x00000000
+    Font            = MS Sans Serif,8,400,0,0,0
+    ForeColor       = 0x80000012
+    Height          = 44
+    ImageType       = -1
+    Left            = 106
+    MultiLine       = 0
+    OwnerDraw       = 0
+    NormalStyle     = 0x54000300
+    Picture         = [None]
+    PicturePosition = 0
+    RightToLeft     = 0
+    StaticEdge      = 0
+    TabOrder        = 0
+    TabStop         = 1
+    Text            = Salveaza *.bmp (F2)
+    ToolTipText     = 
+    Top             = 5
+    Visible         = 1
+    Width           = 121
+  End
+End
+
+.Const
+WM_CAP_FILE_SAVEDIB 	Equ WM_USER + 25
+
+.Data?
+;Cale salvare bmp
+szFileName	DB MAX_PATH Dup(?)
+
+.Data
+;Proc strings
+szCamTitle 		DB "FASMWEBCAM", 0
+szLibName 		DB "avicap32.dll", 0
+szProcName 		DB "capCreateCaptureWindowW", 0
+
+;Save file string
+szDefaultFileName	DB "fisiere\tCam.bmp", 0
+
+;Mesaj ok
+szSaveOk 		DB "Imagine salvata", 0
+
+;Camera proc pointer
+pCamProc 		DD 0
+
+;Handle of camera
+hWebcam 		DD 0
+
+;Handle fereastra
+hWin			DD 0
+
+;Camera settings
+nDevice			DD 0
+nFPS			DD 1
+
+;redimensionare
+bInitDone		BOOL FALSE
+
+;STRUCTURI
+iMenu 		    MENUITEMINFO <>
+
+.Code
+
+Window6Procedure Proc hWnd:HWND, uMsg:ULONG, wParam:WPARAM, lParam:LPARAM
+	.If uMsg == WM_CREATE
+		Mov Eax, hWnd
+		Mov hWin, Eax
+
+	    Invoke LoadLibrary, Addr szLibName
+	    Mov Ecx, Eax
+	    Invoke GetProcAddress, Eax, Addr szProcName
+	    Mov pCamProc, Eax
+	    Invoke FreeLibrary, Ecx
+
+		Invoke PornesteCamera, 0, 50, 640, 480
+
+		;Invoke SetFiltruFisierDlg, hWnd, Offset _sFiltruFisier, Offset _sDefPrestab
+
+		Invoke GolesteString, Addr szFileName, MAX_PATH
+		Invoke szCatStr, Addr szFileName, Addr szDefaultFileName
+
+		Mov Eax, SizeOf iMenu
+		Mov iMenu.cbSize, Eax
+		Mov iMenu.fMask, MIIM_DATA Or MIIM_TYPE
+		Mov iMenu.fState, MFS_ENABLED
+		Mov iMenu.hSubMenu, NULL
+		Mov iMenu.hbmpChecked, NULL
+		Mov iMenu.hbmpUnchecked, NULL
+		;Mov Eax, Offset szClassName
+		Mov Eax, Offset szFileName
+		Mov iMenu.dwItemData, Eax
+		Mov Eax, Offset szFileName
+		Mov iMenu.dwTypeData, Eax
+		Invoke StrLen, Addr szFileName
+		Mov iMenu.cch, Eax
+		Mov Eax, 209
+		Mov iMenu.wID, Eax
+		Mov iMenu.fMask, MIIM_DATA Or MIIM_TYPE
+		Mov iMenu.fType, MFT_STRING
+
+		Invoke GetMenu, hWnd
+		Invoke SetMenuItemInfo, Eax, IDM_WINDOW6_MNUSAVEFILE, 0, Addr iMenu
+
+		;Mov bInitDone, TRUE
+		Invoke FadeIn, hWnd, 1
+
+		Invoke GetWindowRect, hWnd, Addr _patrat
+		Invoke SetWindowPos, hWnd, _nToggleTopMost, _patrat.left, _patrat.top, 0, 0, SWP_NOSIZE
+
+		Invoke SendMessage, hWnd, WM_COMMAND, IDC_WINDOW6_BTNACTIVEAZA, 0
+
+	.ElseIf uMsg == WM_COMMAND
+		.If wParam == IDM_WINDOW6_MNUSETSAVEPATH
+			Invoke SalveazaFisierDlg, hWnd, Offset _sNumeFisier, Offset _sTitluFisier
+			.If Eax
+				Invoke GolesteString, Addr szFileName, MAX_PATH
+				Invoke szCatStr, Addr szFileName, Addr _sNumeFisier
+
+				Mov Eax, Offset szFileName
+				Mov iMenu.dwItemData, Eax
+				Mov Eax, Offset szFileName
+				Mov iMenu.dwTypeData, Eax
+				Invoke StrLen, Addr szFileName
+				Mov iMenu.cch, Eax
+
+				Invoke GetMenu, hWnd
+				Invoke SetMenuItemInfo, Eax, IDM_WINDOW6_MNUSAVEFILE, 0, Addr iMenu
+			.EndIf
+
+		.ElseIf wParam == IDM_WINDOW6_MNUSAVE
+			.If hWebcam
+				Invoke SendMessage, hWebcam, WM_CAP_FILE_SAVEDIB, 0, Addr szFileName
+				Invoke MessageBox, hWnd, Addr szFileName, Addr szSaveOk, 0
+			.EndIf
+
+		.ElseIf wParam == IDM_WINDOW6_MNUCLOSE
+			Invoke InchideCamera
+			Mov hWebcam, 0
+
+		.ElseIf wParam == IDM_WINDOW6_MNUACTIVEAZA
+			Invoke ActiveazaCamera, nDevice, nFPS
+
+		.ElseIf wParam == IDM_WINDOW6_MNUINCHIDE
+			Invoke SendMessage, hWnd, WM_CLOSE, 0, 0
+
+		.ElseIf wParam == IDM_WINDOW6_MNUSEND2MAIN
+			Invoke SendCam2Main
+
+		.ElseIf wParam == IDM_WINDOW6_MNUSAVE
+			.If hWebcam
+				Invoke SendMessage, hWebcam, WM_CAP_FILE_SAVEDIB, 0, Addr szFileName
+				Invoke MessageBox, hWnd, Addr szSaveOk, Addr _szSucces, 0
+			.EndIf
+
+		.ElseIf wParam == IDM_WINDOW6_MNUCLOSE
+			Invoke InchideCamera
+			Mov hWebcam, 0
+
+		.ElseIf wParam == IDM_WINDOW6_MNUACTIVEAZA
+			Invoke ActiveazaCamera, nDevice, nFPS
+
+		.ElseIf wParam == IDM_WINDOW6_MNUINCHIDE
+			Invoke SendMessage, hWnd, WM_CLOSE, 0, 0
+
+		.ElseIf wParam == IDM_WINDOW6_MNUSEND2MAIN
+			Invoke SendCam2Main
+
+		.ElseIf wParam == IDM_WINDOW6_MNUSETCAMERASETTINGS
+			.If hWebcam
+				Invoke SendMessage, hWebcam, WM_CAP_DLG_VIDEOFORMAT, nDevice, 0
+			.EndIf
+
+		.ElseIf wParam == IDM_WINDOW6_MNUSAVEFILE
+			Jmp @F
+				szOpen DB "Open", 0
+@@:
+			Invoke ShellExecute, hWnd, Addr szOpen, Addr szFileName, 0, 0, SW_SHOW
+
+		.ElseIf wParam == IDC_WINDOW6_BTNSAVE
+			Invoke SendMessage, hWnd, WM_COMMAND, IDM_WINDOW6_MNUSAVE, 0
+
+		.ElseIf wParam == IDC_WINDOW6_BTNSEND2MAIN
+			Invoke SendCam2Main
+
+		.ElseIf wParam == IDC_WINDOW6_BTNACTIVEAZA
+			Invoke SendMessage, hWnd, WM_COMMAND, IDM_WINDOW6_MNUACTIVEAZA, 0
+
+		.ElseIf wParam == IDC_WINDOW6_BTNCLOSE
+			Invoke SendMessage, hWnd, WM_COMMAND, IDM_WINDOW6_MNUCLOSE, 0
+
+		.EndIf
+
+	.ElseIf uMsg == WM_KEYUP
+		.If wParam == VK_F12
+			Invoke SendMessage, hWnd, WM_COMMAND, IDM_WINDOW6_MNUSETSAVEPATH, 0
+
+		.ElseIf wParam == VK_F2
+			.If hWebcam
+				Invoke SendMessage, hWebcam, WM_CAP_FILE_SAVEDIB, 0, Addr szFileName
+				Invoke MessageBox, hWnd, Addr szSaveOk, Addr _szSucces, 0
+			.EndIf
+
+		.ElseIf wParam == VK_F5
+			Invoke SendMessage, hWnd, WM_COMMAND, IDM_WINDOW6_MNUACTIVEAZA, 0
+
+		.ElseIf wParam == VK_F7
+			Invoke SendMessage, hWnd, WM_COMMAND, IDM_WINDOW6_MNUCLOSE, 0
+
+		.ElseIf wParam == VK_F8
+			Invoke SendMessage, hWnd, WM_COMMAND, IDM_WINDOW6_MNUSETCAMERASETTINGS, 0
+
+		.ElseIf wParam == VK_F1
+			Invoke SendMessage, hWnd, WM_COMMAND, IDM_WINDOW6_MNUSEND2MAIN, 0
+
+		.ElseIf wParam == VK_ESCAPE
+			Invoke GetKeyState, VK_SHIFT
+			.If Eax > 1
+				Invoke SendMessage, hWnd, WM_COMMAND, IDM_WINDOW6_MNUINCHIDE, 0
+			.EndIf
+
+		.EndIf
+
+	.ElseIf uMsg == WM_MOUSEMOVE
+		Invoke GetDC, hWebcam
+		;Push Eax
+		;Invoke SetPixel, Eax, 201, 201, Red
+		;Pop Eax
+		Invoke GetPixel, Eax, 201, 201
+		Invoke nDebug, hWnd, Eax
+
+
+
+	.ElseIf uMsg == WM_SIZE
+;		.If bInitDone
+;			Invoke RedimensioneazaCamera
+;		.EndIf
+
+	.ElseIf uMsg == WM_CLOSE
+		Invoke SendMessage, hWnd, WM_COMMAND, IDM_WINDOW6_MNUCLOSE, 0
+		Invoke FadeOut, hWnd, 1
+		Mov _hWnd6, 0
+
+		Invoke IsModal, hWnd
+		.If Eax
+			Invoke EndModal, hWnd, IDCANCEL
+			Mov Eax, TRUE ;Return TRUE
+			Ret
+		.EndIf
+	.EndIf
+	Xor Eax, Eax	;Return FALSE
+	Ret
+Window6Procedure EndP
+
+PornesteCamera Proc nX:DWord, nY:DWord, nW:DWord, nH:DWord
+
+    Push 0
+	Push hWin
+	Push nH
+	Push nW
+	Push nY
+	Push nX
+	Push WS_VISIBLE Or WS_CHILD
+	Push Offset szCamTitle
+	Call pCamProc
+	Mov hWebcam, Eax
+
+	Ret
+PornesteCamera EndP
+
+InchideCamera Proc
+	Invoke SendMessage, hWebcam, WM_CAP_DRIVER_DISCONNECT, Addr szCamTitle, 0
+	Invoke GetMenu, hWin
+	Push Eax
+	Invoke EnableMenuItem, Eax, IDM_WINDOW6_MNUACTIVEAZA, MF_ENABLED
+	Pop Eax
+	Push Eax
+	Invoke EnableMenuItem, Eax, IDM_WINDOW6_MNUSAVE, MF_GRAYED
+	Pop Eax
+	Push Eax
+	Invoke EnableMenuItem, Eax, IDM_WINDOW6_MNUCLOSE, MF_GRAYED
+	Pop Eax
+	Push Eax
+	Invoke EnableMenuItem, Eax, IDM_WINDOW6_MNUSEND2MAIN, MF_GRAYED
+	Pop Eax
+	Invoke EnableMenuItem, Eax, IDM_WINDOW6_MNUSETCAMERASETTINGS, MF_GRAYED
+
+	Invoke GetDlgItem, hWin, IDC_WINDOW6_BTNACTIVEAZA
+	Invoke EnableWindow, Eax, TRUE
+	Invoke GetDlgItem, hWin, IDC_WINDOW6_BTNSAVE
+	Invoke EnableWindow, Eax, FALSE
+	Invoke GetDlgItem, hWin, IDC_WINDOW6_BTNCLOSE
+	Invoke EnableWindow, Eax, FALSE
+	Invoke GetDlgItem, hWin, IDC_WINDOW6_BTNSEND2MAIN
+	Invoke EnableWindow, Eax, FALSE
+
+	Ret
+InchideCamera EndP
+
+ActiveazaCamera Proc nDev:DWord, nFrames:DWord
+	Invoke RedimensioneazaCamera
+
+	Invoke SendMessage, hWebcam, WM_CAP_DRIVER_CONNECT, nDev, 0
+	Invoke SendMessage, hWebcam, WM_CAP_SET_SCALE, TRUE, 0
+	Invoke SendMessage, hWebcam, WM_CAP_SET_PREVIEWRATE, nFrames, 0
+	Invoke SendMessage, hWebcam, WM_CAP_SET_PREVIEW, TRUE, 0
+
+	Invoke GetMenu, hWin
+	Push Eax
+	Invoke EnableMenuItem, Eax, IDM_WINDOW6_MNUACTIVEAZA, MF_GRAYED
+	Pop Eax
+	Push Eax
+	Invoke EnableMenuItem, Eax, IDM_WINDOW6_MNUSAVE, MF_ENABLED
+	Pop Eax
+	Push Eax
+	Invoke EnableMenuItem, Eax, IDM_WINDOW6_MNUCLOSE, MF_ENABLED
+	Pop Eax
+	Push Eax
+	Invoke EnableMenuItem, Eax, IDM_WINDOW6_MNUSEND2MAIN, MF_ENABLED
+	Pop Eax
+	Invoke EnableMenuItem, Eax, IDM_WINDOW6_MNUSETCAMERASETTINGS, MF_ENABLED
+
+	Invoke GetDlgItem, hWin, IDC_WINDOW6_BTNACTIVEAZA
+	Invoke EnableWindow, Eax, FALSE
+	Invoke GetDlgItem, hWin, IDC_WINDOW6_BTNSAVE
+	Invoke EnableWindow, Eax, TRUE
+	Invoke GetDlgItem, hWin, IDC_WINDOW6_BTNCLOSE
+	Invoke EnableWindow, Eax, TRUE
+	Invoke GetDlgItem, hWin, IDC_WINDOW6_BTNSEND2MAIN
+	Invoke EnableWindow, Eax, TRUE
+
+	Ret
+ActiveazaCamera EndP
+
+RedimensioneazaCamera Proc
+Local patrat:RECT
+
+	Invoke GetWindowRect, hWin, Addr patrat
+	Fild patrat.right
+	Fild patrat.left
+	Fsub
+	Fistp patrat.right
+	;Sub patrat.right, 300
+
+	Fild patrat.bottom
+	Fild patrat.top
+	Fsub
+	Fistp patrat.bottom
+	Sub patrat.bottom, 100
+	;Sub patrat.bottom, 300
+
+	Invoke PornesteCamera, 0, 50, patrat.right, patrat.bottom
+
+	Ret
+RedimensioneazaCamera EndP
+
+SendCam2Main Proc
+Local patrat:RECT
+Local nX:DWord
+Local nY:DWord
+Local nW:DWord
+Local nH:DWord
+Local nWCam:DWord
+Local nHCam:DWord
+Local hIContur:DWord
+
+	Invoke GetWindowRect, _hWnd1, Addr patrat
+	Mov Eax, patrat.left
+	Mov nX, Eax
+	Mov Eax, patrat.top
+	Mov nY, Eax
+
+	Invoke GetWindowRect, hWin, Addr patrat
+	Fild patrat.right
+	Fild patrat.left
+	Fsub
+	Fistp patrat.right
+	Add patrat.right, 100
+	Mov Eax, patrat.right
+	Mov nWCam, Eax
+
+	Fild patrat.bottom
+	Fild patrat.top
+	Fsub
+	Fistp patrat.bottom
+	Sub patrat.bottom, 52
+	Mov Eax, patrat.bottom
+	Mov nHCam, Eax
+
+	.If nHCam < 260
+		Invoke SetWindowPos, _hWnd1, _nToggleTopMost, nX, nY, patrat.right, 280, SWP_SHOWWINDOW
+
+		Invoke GetWindowRect, _hWnd1, Addr patrat
+		;Calculeaza dimensiuni
+		Fild patrat.right   ; Descazut
+		Fild patrat.left    ; Scazator
+		Fsub            	; Operatie scadere
+		Fistp nW     		; Salveaza rezultatul in variabila
+
+		Fild patrat.bottom 	; Descazut
+		Fild patrat.top  	; Scazator
+		Fsub            	; Operatie scadere
+		Fistp nH     		; Salveaza rezultatul in variabila
+
+		Invoke CreateRectRgn, 0, 0, nW, nH
+		Invoke SetWindowRgn, _hWnd1, Eax, TRUE
+
+		Invoke GetDlgItem, _hWnd1, IDC_WINDOW1_IMGCONTUR
+		Mov hIContur, Eax
+
+		Mov Eax, nWCam
+		Sub Eax, 110
+		Mov Ebx, nHCam
+		Sub Ebx, 50
+		Invoke SetWindowPos, hIContur, HWND_TOP, 0, 0, Eax, Ebx, SWP_NOMOVE
+
+	.Else
+		Invoke SetWindowPos, _hWnd1, _nToggleTopMost, nX, nY, patrat.right, patrat.bottom, SWP_SHOWWINDOW
+
+		Invoke GetWindowRect, _hWnd1, Addr patrat
+		;Calculeaza dimensiuni
+		Fild patrat.right   ; Descazut
+		Fild patrat.left    ; Scazator
+		Fsub            	; Operatie scadere
+		Fistp nW     		; Salveaza rezultatul in variabila
+
+		Fild patrat.bottom 	; Descazut
+		Fild patrat.top  	; Scazator
+		Fsub            	; Operatie scadere
+		Fistp nH     		; Salveaza rezultatul in variabila
+
+		Invoke CreateRectRgn, 0, 0, nW, nH
+		Invoke SetWindowRgn, _hWnd1, Eax, TRUE
+
+	.EndIf
+
+	Invoke GetDC, hWin
+	Push Eax
+	Invoke GetDlgItem, _hWnd1, IDC_WINDOW1_IMGCONTUR
+	Invoke GetDC, Eax
+	Pop Edx
+	Sub patrat.right, 106
+	Invoke BitBlt, Eax, 0, 0, nWCam, nHCam, Edx, 0, 50, SRCCOPY
+
+	;Ciupeste din ecran
+	Invoke GetMenu, _hWnd1
+	Invoke EnableMenuItem, Eax, IDM_WINDOW1_MNURELOADBMP, MF_GRAYED
+
+	Invoke SaveMasterDC, _hWnd1
+	Mov Eax, _hMasterDC
+	Mov _hUndoDC, Eax
+	Invoke GetDlgItem, _hWnd1, IDC_WINDOW1_IMGCONTUR
+	Invoke SetUndoDC, Eax
+	Invoke ToggleUndoMnu, _hWnd1
+
+	Invoke EnableControls, _hWnd1, 1
+	Mov _bFundalCiupit, TRUE
+	Mov _bPrimaData, FALSE
+
+	Ret
+SendCam2Main EndP
+
+Window6btnSave Proc hWnd:HWND, uMsg:ULONG, wParam:WPARAM, lParam:LPARAM
+	.If uMsg == WM_KEYUP
+		Invoke SendMessage, hWin, WM_KEYUP, wParam, lParam
+	.EndIf
+	Xor Eax, Eax	;Return FALSE
+	Ret
+Window6btnSave EndP
+
+Window6btnSend2Main Proc hWnd:HWND, uMsg:ULONG, wParam:WPARAM, lParam:LPARAM
+	.If uMsg == WM_KEYUP
+		Invoke SendMessage, hWin, WM_KEYUP, wParam, lParam
+	.EndIf	
+	Xor Eax, Eax	;Return FALSE
+	Ret
+Window6btnSend2Main EndP
+
+Window6btnActiveaza Proc hWnd:HWND, uMsg:ULONG, wParam:WPARAM, lParam:LPARAM
+	.If uMsg == WM_KEYUP
+		Invoke SendMessage, hWin, WM_KEYUP, wParam, lParam
+	.EndIf	
+	Xor Eax, Eax	;Return FALSE
+	Ret
+Window6btnActiveaza EndP
+
+Window6btnClose Proc hWnd:HWND, uMsg:ULONG, wParam:WPARAM, lParam:LPARAM
+	.If uMsg == WM_KEYUP
+		Invoke SendMessage, hWin, WM_KEYUP, wParam, lParam
+	.EndIf	
+	Xor Eax, Eax	;Return FALSE
+	Ret
+Window6btnClose EndP

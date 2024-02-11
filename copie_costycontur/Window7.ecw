@@ -1,0 +1,397 @@
+;Do not modify this file!!!
+Easy Code
+Begin Window = Window7
+  AlignMode       = 0
+  AutoRedraw      = 1
+  BackColor       = 0x8000000F
+  Border          = 4
+  Caption         = 1
+  CenterWindow    = 2
+  ClientEdge      = 0
+  ClipChildren    = 1
+  ClipSiblings    = 1
+  ContextHelp     = 0
+  ControlMenu     = 1
+  CursorIcon      = [None]
+  CursorShape     = 0
+  DisableClose    = 0
+  DrawingStyle    = 0
+  DrawingWidth    = 1
+  Enabled         = 1
+  ExStyle         = 0x00040101
+  Font            = MS Sans Serif,8,400,0,0,0
+  ForeColor       = 0x80000012
+  Height          = 8145
+  IconBig         = [None]
+  IconSmall       = [None]
+  ImageType       = -1
+  KeepSize        = 0
+  Left            = 0
+  MaximizeBox     = 0
+  MDIChild        = 0
+  Menu            = 98
+  MenuString      = 0,Fisier,,,0,0,0|1,Reincarca *.cbb,NNURELOADFILE,,0,0,0|1,-,,,0,0,0|1,Inchide [x],MNUCLOSE,,0,0,0
+  MinimizeBox     = 0
+  NormalStyle     = 0x56C80000
+  Picture         = [None]
+  RightToLeft     = 0
+  ScaleMode       = 1
+  ScrollBars      = 0
+  ShowMode        = 0
+  Style           = 0
+  Text            = Window7
+  TimerInterval   = 0
+  ToolTip         = 0
+  ToolWindow      = 0
+  Top             = 0
+  Visible         = 1
+  Width           = 9210
+  Begin Edit = Edit1
+    AutoHScroll     = 1
+    AutoVScroll     = 0
+    BackColor       = 0x80000005
+    Border          = 1
+    CaseStyle       = 0
+    ClientEdge      = 1
+    ClipSiblings    = 1
+    CursorIcon      = [None]
+    CursorShape     = 0
+    DragAndDrop     = 1005
+    Enabled         = 1
+    ExStyle         = 0x00000200
+    Font            = MS Sans Serif,8,400,0,0,0
+    ForeColor       = 0x80000008
+    Height          = 465
+    Left            = 1500
+    MaxLength       = 0
+    MultiLine       = 0
+    NormalStyle     = 0x54000000
+    PasswordChar    = 
+    ReadOnly        = 0
+    RightToLeft     = 0
+    ScrollBars      = 0
+    StaticEdge      = 0
+    TabOrder        = 3
+    TabStop         = 1
+    Text            = Edit1
+    TextAlignment   = 0
+    ToolTipText     = 
+    Top             = 75
+    Visible         = 1
+    WantReturn      = 0
+    Width           = 7560
+  End
+  Begin Button = Button2
+    BackColor       = 0x8000000F
+    Border          = 0
+    Cancel          = 0
+    ClientEdge      = 0
+    ClipSiblings    = 1
+    CursorIcon      = [None]
+    CursorShape     = 0
+    Default         = 0
+    DragAndDrop     = 1005
+    DrawFocus       = 1
+    Enabled         = 1
+    ExStyle         = 0x00000000
+    Font            = MS Sans Serif,8,400,0,0,0
+    ForeColor       = 0x80000012
+    Height          = 510
+    ImageType       = -1
+    Left            = 750
+    MultiLine       = 0
+    OwnerDraw       = 0
+    NormalStyle     = 0x54000300
+    Picture         = [None]
+    PicturePosition = 0
+    RightToLeft     = 0
+    StaticEdge      = 0
+    TabOrder        = 2
+    TabStop         = 1
+    Text            = !
+    ToolTipText     = 
+    Top             = 45
+    Visible         = 1
+    Width           = 675
+  End
+  Begin Picture = Picture1
+    Align           = 0
+    AutoSize        = 1
+    BackColor       = 0x00FFFFFF
+    Border          = 1
+    ClientEdge      = 0
+    ClipChildren    = 1
+    ClipSiblings    = 1
+    CursorIcon      = [None]
+    CursorShape     = 0
+    DragAndDrop     = 1001
+    DrawingStyle    = 0
+    DrawingWidth    = 1
+    Enabled         = 1
+    ExStyle         = 0x00000000
+    FlickerFree     = 0
+    Font            = MS Sans Serif,8,400,0,0,0
+    ForeColor       = 0x80000012
+    Height          = 416
+    ImageType       = -1
+    Left            = 5
+    NormalStyle     = 0x56800000
+    Picture         = [None]
+    RightToLeft     = 0
+    ScaleMode       = 0
+    ScrollBars      = 0
+    StaticEdge      = 0
+    TabOrder        = 1
+    TabStop         = 0
+    Text            = 
+    TextAlignment   = 0
+    ToolTipText     = 
+    Top             = 42
+    Visible         = 1
+    Width           = 599
+  End
+  Begin Button = Button1
+    BackColor       = 0x8000000F
+    Border          = 0
+    Cancel          = 0
+    ClientEdge      = 0
+    ClipSiblings    = 1
+    CursorIcon      = [None]
+    CursorShape     = 0
+    Default         = 0
+    DragAndDrop     = 1000
+    DrawFocus       = 1
+    Enabled         = 1
+    ExStyle         = 0x00000000
+    Font            = MS Sans Serif,8,400,0,0,0
+    ForeColor       = 0x80000012
+    Height          = 510
+    ImageType       = -1
+    Left            = 30
+    MultiLine       = 0
+    OwnerDraw       = 0
+    NormalStyle     = 0x54000300
+    Picture         = [None]
+    PicturePosition = 0
+    RightToLeft     = 0
+    StaticEdge      = 0
+    TabOrder        = 0
+    TabStop         = 1
+    Text            = >
+    ToolTipText     = 
+    Top             = 45
+    Visible         = 1
+    Width           = 645
+  End
+End
+
+.Const
+nSleep		Equ 10
+
+.Data?
+hFile		HANDLE ?
+hDCPic		HDC ?
+
+szBuffer	DB 10240 Dup(?)
+
+.Data
+nBytesUsed	DD 0
+iOffset		DD 0
+iRepeat		DD 0
+
+nX			DD 0
+nY			DD 0
+
+.Code
+
+Window7Procedure Proc hWnd:HWND, uMsg:ULONG, wParam:WPARAM, lParam:LPARAM
+	.If uMsg == WM_CREATE
+		Mov Eax, hWnd
+		Mov _hWnd7, Eax
+
+		Invoke GetDlgItem, hWnd, IDC_WINDOW7_PICTURE1
+		Invoke GetDC, Eax
+		Mov hDCPic, Eax
+
+		;bugFix hDC
+;		Invoke GetWindowLong, hWnd, GWL_EXSTYLE
+;		Or Eax, WS_EX_LAYERED
+;		Invoke SetWindowLong, hWnd, GWL_EXSTYLE, Eax
+;		;Invoke CiupesteFundal, hWnd
+;		;Invoke RestRgnFer2, hWnd
+;		Invoke SetLayeredWindowAttributes, hWnd, 10, 255, LWA_ALPHA
+
+		Invoke FadeIn, hWnd, 1
+
+		Invoke CitesteFisier, hWnd
+
+	.ElseIf uMsg == WM_COMMAND
+		.If wParam == IDM_WINDOW7_NNURELOADFILE
+			Invoke CitesteFisier, hWnd
+
+		.ElseIf wParam == IDM_WINDOW7_MNUCLOSE
+			Invoke SendMessage, hWnd, WM_CLOSE, 0, 0
+
+		.ElseIf wParam == IDC_WINDOW7_BUTTON2
+			Invoke GetDlgItem, hWnd, IDC_WINDOW7_PICTURE1
+			Push Eax
+			Invoke ShowWindow, Eax, SW_HIDE
+			Pop Eax
+			Invoke ShowWindow, Eax, SW_SHOW
+
+		.ElseIf wParam == IDC_WINDOW1_BUTTON1
+				Invoke GolesteString, Addr szBuffer, 10240
+				Invoke GetDlgItemText, hWnd, IDC_WINDOW1_EDIT1, Addr szBuffer, 10240
+				Mov iOffset, 0
+				Mov nX, 100
+				Mov nY, 100
+inceput:
+				Mov Ecx, Offset szBuffer
+				Add Ecx, iOffset
+;				Invoke MessageBox, 0, Ecx, 0, 0
+;				Ret
+				Mov Eax, [Ecx]
+;				Mov Edx, 0
+;				Mov Ebx, 01000000H
+;				Div Ebx
+				Mov Ebx, Eax
+				And Ebx, 0FFH
+
+;				Push Ebx
+;				Invoke nDebug, hWnd, iOffset
+;				Pop Ebx
+;				Push Ebx
+;				Invoke nDebug, 0, Ebx
+;				Pop Ebx
+
+				.If Ebx == 0
+					Invoke Sleep, 1000
+					Jmp sfarsit
+
+				.ElseIf Ebx < 64 ;A stanga
+					And Ebx, 63
+
+					Mov iRepeat, 0
+					.Repeat
+					Push Ebx
+						Dec nX
+						Invoke SetPixel, hDCPic, nX, nY, Red
+;						Invoke nDebug, 0, nX
+;						Invoke nDebug, 0, nY
+						Invoke Sleep, nSleep
+					Inc iRepeat
+					Pop Ebx
+					.Until iRepeat == Ebx
+
+					Inc iOffset
+				.ElseIf Ebx < 128 ;B dreapta
+					And Ebx, 63
+
+					Mov iRepeat, 0
+					.Repeat
+					Push Ebx
+						Inc nX
+						Invoke SetPixel, hDCPic, nX, nY, Red
+;						Invoke nDebug, 0, nX
+;						Invoke nDebug, 0, nY
+						Invoke Sleep, nSleep
+					Inc iRepeat
+					Pop Ebx
+					.Until iRepeat == Ebx
+
+					Inc iOffset
+				.ElseIf Ebx < 192 ; C sus
+					And Ebx, 63
+
+					Mov iRepeat, 0
+					.Repeat
+					Push Ebx
+						Inc nY
+						Invoke SetPixel, hDCPic, nX, nY, Red
+;						Invoke nDebug, 0, nX
+;						Invoke nDebug, 0, nY
+						Invoke Sleep, nSleep
+					Inc iRepeat
+					Pop Ebx
+					.Until iRepeat == Ebx
+
+					Inc iOffset
+				.Else ;D jos
+					And Ebx, 63
+
+					Mov iRepeat, 0
+					.Repeat
+					Push Ebx
+						Dec nY
+						Invoke SetPixel, hDCPic, nX, nY, Red
+;						Invoke nDebug, 0, nX
+;						Invoke nDebug, 0, nY
+						Invoke Sleep, nSleep
+					Inc iRepeat
+					Pop Ebx
+					.Until iRepeat == Ebx
+
+					Inc iOffset
+				.EndIf
+
+				Jmp inceput
+sfarsit:
+			Jmp @F
+				szGata DB "Gata", 0
+@@:
+			Invoke MessageBox, 0, Addr szGata, 0, 0
+			Invoke nDebug, 0, iOffset
+
+		.EndIf
+
+	.ElseIf uMsg == WM_CLOSE
+		Invoke FadeOut, hWnd, 1
+		Mov _hWnd7, 0
+		Invoke IsModal, hWnd
+		.If Eax
+			Invoke EndModal, hWnd, IDCANCEL
+			Mov Eax, TRUE ;Return TRUE
+			Ret
+		.EndIf
+	.EndIf
+	Xor Eax, Eax	;Return FALSE
+	Ret
+Window7Procedure EndP
+
+CitesteFisier Proc hWnd:DWord
+	Invoke CreateFile, Addr _szCSMBascomCompFile, GENERIC_READ, 0, 0, OPEN_ALWAYS, 0, 0
+	Mov hFile, Eax
+	.If !Eax
+		Jmp @F
+			szErr DB "Nu s-a putut citi fisierul", 0
+@@:
+		Invoke MessageBox, hWnd, Addr szErr, 0, 0
+	.Else
+		Invoke GolesteString, Addr szBuffer, 10240
+
+		Invoke GetFileSize, hFile, 0
+		Invoke ReadFile, hFile, Addr szBuffer, Eax, Addr nBytesUsed, NULL
+		Invoke CloseHandle, hFile
+
+		;Invoke pDebug, 0
+
+		Invoke SetDlgItemText, hWnd, IDC_WINDOW1_EDIT1, Addr szBuffer
+
+	.EndIf
+
+	Ret
+CitesteFisier EndP
+
+Window1Edit1 Proc hWnd:HWND, uMsg:ULONG, wParam:WPARAM, lParam:LPARAM
+	.If uMsg == WM_KEYUP
+		.If wParam == VK_ESCAPE
+			Jmp @F
+				szNULL DB 0
+@@:
+			Invoke SetDlgItemText, _hWnd7, IDC_WINDOW1_EDIT1, Addr szNULL
+		.EndIf
+	.EndIf
+
+	Xor Eax, Eax	;Return FALSE
+	Ret
+Window1Edit1 End

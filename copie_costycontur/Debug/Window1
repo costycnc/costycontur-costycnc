@@ -1,0 +1,307 @@
+.486
+.387
+.mmx
+.xmm
+.model flat,stdcall
+option casemap:none
+DEBUG Equ 1
+__NO_NOISE__ Equ 1
+include ECExterns.inc
+include ECResFile.inc
+include ECMacros.asm
+
+externdef ECLibbUnicode:dword
+externdef App:ECApplication
+externdef Error:ECErrorStruct
+
+starterrorhandler	equ	<StartErrorHandler>
+STARTERRORHANDLER	equ	<StartErrorHandler>
+
+enderrorhandler	equ	<EndErrorHandler>
+ENDERRORHANDLER	equ	<EndErrorHandler>
+
+StartErrorHandler MACRO dwErrorHandler
+	assume fs:nothing
+	mov eax,dwErrorHandler
+	mov Error.dwEip,eax
+	mov Error.dwEbp,ebp
+	push offset ECErrorHandle
+	push fs:[0]
+	mov Error.dwEsp,esp
+	mov fs:[0],esp
+ENDM
+
+EndErrorHandler MACRO
+	pop fs:[0]
+	add esp,4
+ENDM
+
+ECOffsetToTextA MACRO quoted_text:VARARG
+	LOCAL ECvtext
+.Data
+	ECvtext DB quoted_text,0
+.Code
+	EXITM <Offset ECvtext>
+ENDM
+
+ECLibGetWindowLong proto :dword
+ECInitProc proto :dword,:dword,:dword,:dword
+ECLibCreateWindow proto :dword,:HWND,:BOOL,:LPARAM
+ECErrorHandle proto :dword,:dword,:dword,:dword
+ECLibFinalHandler proto :dword
+ECLibGetWindowPointer proto
+ECLibInitLibrary proto :dword,:dword,:dword,:dword,:dword,:dword
+ECLibEndLibrary proto
+ProcessMessages proto :HWND,:ULONG,:WPARAM,:LPARAM
+OnIdle proto :dword
+ECLibGetMessage proto :dword, :dword, :dword, :dword
+ECLibDispatchMessage proto :DWord
+ECLibTranslateAccelerator proto :DWord, :DWord, :DWord
+Window1Procedure proto :HWND,:ULONG,:WPARAM,:LPARAM
+
+Window2Initialize proto
+Window3Initialize proto
+Window6Initialize proto
+Window5Initialize proto
+Window4Initialize proto
+
+.data
+
+align 8
+
+IDR_EC_Window1_FONT	DB	'MS Sans Serif',0
+IDR_EC_Window1_NAME	DB	'Window1',0
+IDR_EC_Window1_TEXT	DB	'CostyContur 1.0',0
+IDR_EC_Window1_progresMaxY_FONT	DB	'MS Sans Serif',0
+IDR_EC_Window1_progresMaxY_NAME	DB	'progresMaxY',0
+IDR_EC_Window1_progresMaxY_TEXT	DB	0
+IDR_EC_Window1_progresMaxY_TOOLTIPTEXT	DB	0
+IDR_EC_Window1_progresMaxX_FONT	DB	'MS Sans Serif',0
+IDR_EC_Window1_progresMaxX_NAME	DB	'progresMaxX',0
+IDR_EC_Window1_progresMaxX_TEXT	DB	0
+IDR_EC_Window1_progresMaxX_TOOLTIPTEXT	DB	0
+IDR_EC_Window1_btnSend2Cnc_FONT	DB	'MS Sans Serif',0
+IDR_EC_Window1_btnSend2Cnc_NAME	DB	'btnSend2Cnc',0
+IDR_EC_Window1_btnSend2Cnc_TEXT	DB	'Trimite la C.N.C.',0
+IDR_EC_Window1_btnSend2Cnc_TOOLTIPTEXT	DB	0
+IDR_EC_Window1_BtnContur_FONT	DB	'MS Sans Serif',0
+IDR_EC_Window1_BtnContur_NAME	DB	'BtnContur',0
+IDR_EC_Window1_BtnContur_TEXT	DB	'Contureaza',0
+IDR_EC_Window1_BtnContur_TOOLTIPTEXT	DB	0
+IDR_EC_Window1_btnReset_FONT	DB	'MS Sans Serif',0
+IDR_EC_Window1_btnReset_NAME	DB	'btnReset',0
+IDR_EC_Window1_btnReset_TEXT	DB	'Reseteaza',0
+IDR_EC_Window1_btnReset_TOOLTIPTEXT	DB	0
+IDR_EC_Window1_Edit1_FONT	DB	'MS Sans Serif',0
+IDR_EC_Window1_Edit1_NAME	DB	'Edit1',0
+IDR_EC_Window1_Edit1_TEXT	DB	'200',0
+IDR_EC_Window1_Edit1_TOOLTIPTEXT	DB	0
+IDR_EC_Window1_Button1_FONT	DB	'MS Sans Serif',0
+IDR_EC_Window1_Button1_NAME	DB	'Button1',0
+IDR_EC_Window1_Button1_TEXT	DB	'Copiaza ecran',0
+IDR_EC_Window1_Button1_TOOLTIPTEXT	DB	0
+IDR_EC_Window1_Static2_FONT	DB	'MS Sans Serif',0
+IDR_EC_Window1_Static2_NAME	DB	'Static2',0
+IDR_EC_Window1_Static2_TEXT	DB	'Scara gri',0
+IDR_EC_Window1_Static2_TOOLTIPTEXT	DB	0
+IDR_EC_Window1_ImgContur_FONT	DB	'MS Sans Serif',0
+IDR_EC_Window1_ImgContur_NAME	DB	'ImgContur',0
+IDR_EC_Window1_ImgContur_TEXT	DB	0
+IDR_EC_Window1_ImgContur_TOOLTIPTEXT	DB	0
+IDR_EC_Window1_GrupSetari_FONT	DB	'MS Sans Serif',0
+IDR_EC_Window1_GrupSetari_NAME	DB	'GrupSetari',0
+IDR_EC_Window1_GrupSetari_TEXT	DB	'SETARI',0
+IDR_EC_Window1_GrupSetari_TOOLTIPTEXT	DB	0
+
+IDR_EC_Window1_DATA	DD	0,0,08000000Fh,0,0,0,2,0,0
+		DD	0,0,1,1,0,0,0,0,offset IDR_EC_Window1_FONT
+		DD	8,0,0,80000012h,0,401,0,0,COSTEL32
+		DD	COSTEL16,0,-1,0,0,4000,1,0,0,IDR_EC_WINDOW1_MENU
+		DD	offset IDR_EC_Window1_NAME,0,0,0,1,0,0
+		DD	0,0,0,0,0,0,0,offset IDR_EC_Window1_TEXT,0,0,0,0
+		DD	0,0,3,0,1,817,offset Window1Procedure
+		DD	0,0,10,0,00040180h,16CE0000h,0,offset IDR_EC_Window1_DATA
+
+IDR_EC_Window1_progresMaxY_DATA	DD	0,0,08000000Fh,0,0,0,0,0,0
+			DD	0,0,0,1,0,0,0,0,offset IDR_EC_Window1_progresMaxY_FONT
+			DD	8,0,0,8000000Dh,0,343,0,0,0,0,0,(-1),0,0
+			DD	794,0,0,0,offset IDR_EC_Window1_progresMaxY_TOOLTIPTEXT,Offset IDR_EC_Window1_progresMaxY_NAME,0
+			DD	0,0,0,0,0,0,0,100,0,0
+			DD	9,0,offset IDR_EC_Window1_progresMaxY_TEXT,0,0,0,0,4
+			DD	0,21,100,1,12,offset Window1progresMaxY,0,0,0,0
+			DD	00000010h,54000005h,0,0
+
+IDR_EC_Window1_progresMaxX_DATA	DD	0,0,08000000Fh,0,0,0,0,0,0
+			DD	0,0,0,1,0,0,0,0,offset IDR_EC_Window1_progresMaxX_FONT
+			DD	8,0,0,8000000Dh,0,12,0,0,0,0,0,(-1),0,0
+			DD	98,0,0,0,offset IDR_EC_Window1_progresMaxX_TOOLTIPTEXT,Offset IDR_EC_Window1_progresMaxX_NAME,0
+			DD	0,0,0,0,0,0,0,100,0,0
+			DD	8,0,offset IDR_EC_Window1_progresMaxX_TEXT,0,0,0,0,329
+			DD	0,21,100,1,684,offset Window1progresMaxX,0,0,0,0
+			DD	00000010h,54000001h,0,0
+
+IDR_EC_Window1_btnSend2Cnc_DATA	DD	0,0,08000000Fh,0,0,0,0,0,0
+			DD	0,0,0,1,0,0,0,0,offset IDR_EC_Window1_btnSend2Cnc_FONT
+			DD	8,0,0,80000012h,0,39,0,0,0,0,0,-1,0,0
+			DD	4,0,0,0,offset IDR_EC_Window1_btnSend2Cnc_TOOLTIPTEXT,Offset IDR_EC_Window1_btnSend2Cnc_NAME,0
+			DD	0,0,0,0,0,0,0,0,0,0
+			DD	3,1,offset IDR_EC_Window1_btnSend2Cnc_TEXT,0,0,0,0,169
+			DD	1,7,0,1,89,0,0,0,0,0
+			DD	00000010h,54004300h,0,0
+
+IDR_EC_Window1_BtnContur_DATA	DD	0,0,08000000Fh,0,0,0,0,0,0
+			DD	0,0,0,0,0,0,0,0,offset IDR_EC_Window1_BtnContur_FONT
+			DD	8,0,0,80000012h,0,53,0,0,0,0,0,-1,0,0
+			DD	4,0,0,0,offset IDR_EC_Window1_BtnContur_TOOLTIPTEXT,Offset IDR_EC_Window1_BtnContur_NAME,0
+			DD	0,0,0,0,0,0,0,0,0,0
+			DD	2,1,offset IDR_EC_Window1_BtnContur_TEXT,0,0,0,0,113
+			DD	1,7,0,1,89,0,0,0,0,0
+			DD	00000010h,5C004300h,0,0
+
+IDR_EC_Window1_btnReset_DATA	DD	0,0,08000000Fh,0,0,0,0,0,0
+			DD	0,0,0,0,0,0,0,0,offset IDR_EC_Window1_btnReset_FONT
+			DD	8,0,0,80000012h,0,25,0,0,0,0,0,-1,0,0
+			DD	4,0,0,0,offset IDR_EC_Window1_btnReset_TOOLTIPTEXT,Offset IDR_EC_Window1_btnReset_NAME,0
+			DD	0,0,0,0,0,0,0,0,0,0
+			DD	1,1,offset IDR_EC_Window1_btnReset_TEXT,0,0,0,0,84
+			DD	1,7,0,1,89,0,0,0,0,0
+			DD	00000010h,5C004300h,0,0
+
+IDR_EC_Window1_Edit1_DATA	DD	0,0,080000005h,0,0,0,0,0,0
+			DD	0,0,0,1,0,0,0,0,offset IDR_EC_Window1_Edit1_FONT
+			DD	8,0,0,80000008h,0,20,0,0,0,0,0,(-1),0,0
+			DD	58,0,3,0,offset IDR_EC_Window1_Edit1_TOOLTIPTEXT,Offset IDR_EC_Window1_Edit1_NAME,0
+			DD	0,0,0,0,0,0,0,0,0,0
+			DD	4,1,offset IDR_EC_Window1_Edit1_TEXT,0,0,0,0,23
+			DD	0,5,0,1,26,0,0,0,0,0
+			DD	00000210h,54000080h,0,0
+
+IDR_EC_Window1_Button1_DATA	DD	0,0,08000000Fh,0,0,0,0,0,0
+			DD	0,0,0,1,0,0,0,0,offset IDR_EC_Window1_Button1_FONT
+			DD	8,0,0,80000012h,0,25,0,0,0,0,0,-1,0,0
+			DD	4,0,0,0,offset IDR_EC_Window1_Button1_TOOLTIPTEXT,Offset IDR_EC_Window1_Button1_NAME,0
+			DD	0,0,0,0,0,0,0,0,0,0
+			DD	0,1,offset IDR_EC_Window1_Button1_TEXT,0,0,0,0,56
+			DD	1,7,0,1,89,0,0,0,0,0
+			DD	00000010h,54004300h,0,0
+
+IDR_EC_Window1_Static2_DATA	DD	0,1,08000000Fh,0,0,0,0,0,0
+			DD	0,0,0,1,0,0,0,0,offset IDR_EC_Window1_Static2_FONT
+			DD	8,0,0,80000012h,0,13,0,0,0,0,0,(-1),0,0
+			DD	11,0,0,0,offset IDR_EC_Window1_Static2_TOOLTIPTEXT,Offset IDR_EC_Window1_Static2_NAME,0
+			DD	0,0,0,0,0,0,0,255,0,0
+			DD	5,0,offset IDR_EC_Window1_Static2_TEXT,0,0,0,0,24
+			DD	0,4,0,1,42,0,0,0,0,0
+			DD	00000010h,5400010Ch,0,0
+
+IDR_EC_Window1_ImgContur_DATA	DD	0,0,000FFFFFFh,0,0,0,0,0,0
+			DD	0,0,0,1,0,0,0,0,offset IDR_EC_Window1_ImgContur_FONT
+			DD	8,0,0,80000012h,0,346,0,0,0,0,0,-1,0,0
+			DD	102,0,0,0,offset IDR_EC_Window1_ImgContur_TOOLTIPTEXT,Offset IDR_EC_Window1_ImgContur_NAME,0
+			DD	0,0,0,0,0,0,0,0,0,0
+			DD	7,0,offset IDR_EC_Window1_ImgContur_TEXT,0,0,0,0,5
+			DD	1,13,0,1,688,offset Window1ImgContur,0,0,0,0
+			DD	00000030h,54800100h,0,0
+
+IDR_EC_Window1_GrupSetari_DATA	DD	0,0,08000000Fh,0,0,1,0,0,0
+			DD	0,0,0,1,0,0,0,0,offset IDR_EC_Window1_GrupSetari_FONT
+			DD	8,0,0,80000012h,0,44,0,0,0,0,0,(-1),0,0
+			DD	3,0,0,0,offset IDR_EC_Window1_GrupSetari_TOOLTIPTEXT,Offset IDR_EC_Window1_GrupSetari_NAME,0
+			DD	0,0,0,0,0,0,0,0,0,0
+			DD	6,0,offset IDR_EC_Window1_GrupSetari_TEXT,0,0,0,0,6
+			DD	0,6,0,1,91,0,0,0,0,0
+			DD	00000010h,56000000h,0,0
+
+
+App	ECApplication	<0>
+Error	ECErrorStruct	<0>
+ECdwOldErrorHandler		dd	0
+ECProcessMessagesAddress		dd	0
+icc		INITCOMMONCONTROLSEX	<0>
+
+
+.code
+
+align 8
+
+start:
+	invoke SetUnhandledExceptionFilter,addr ECLibFinalHandler
+	mov ECdwOldErrorHandler,eax
+	invoke GetModuleHandle,NULL
+	mov App.Instance,eax
+	mov App.Major,1
+	mov App.Minor,0
+	mov App.Revision,0
+	invoke InitCommonControls
+	mov icc.dwSize,sizeof INITCOMMONCONTROLSEX
+	mov icc.dwICC,03FFFH ;(ICC_WIN95_CLASSES or ICC_DATE_CLASSES or ICC_USEREX_CLASSES or ICC_COOL_CLASSES or ICC_INTERNET_CLASSES or ICC_PAGESCROLLER_CLASS or ICC_NATIVEFNTCTL_CLASS)
+	invoke InitCommonControlsEx,addr icc
+	invoke ECLibInitLibrary,App.Instance,ECOffsetToTextA("CostyContur"),ECOffsetToTextA("CostyContur.exe"),ECOffsetToTextA("CostyContur (Driver CNC)"),3,0
+	invoke ECInitProc,App.Instance,NULL,App.CommandLine,SW_SHOWDEFAULT
+	push eax
+	invoke SetUnhandledExceptionFilter, ECdwOldErrorHandler
+	pop eax
+	invoke ExitProcess,eax
+
+ECErrorHandle PROC pExcept:dword,pFrame:dword,pContext:dword,pDispatch:dword
+	mov eax,pExcept
+	mov eax,dword ptr [eax]
+	mov Error.Code,eax
+	mov eax,pContext
+	push Error.dwEip
+	pop [eax].CONTEXT.regEip
+	push Error.dwEsp
+	pop [eax].CONTEXT.regEsp
+	push Error.dwEbp
+	pop [eax].CONTEXT.regEbp
+	mov eax,ExceptionContinueExecution
+	ret
+ECErrorHandle ENDP
+
+ECInitProc PROC uses ebx edi esi hInst:dword,hPrevInst:dword,CmdLine:dword,CmdShow:dword
+	local bOnIdle:dword,lCount:dword,OnIdleAddress:dword,msg:MSG
+
+	mov bOnIdle,1
+	mov lCount,0
+	mov OnIdleAddress,0
+	invoke ECLibGetWindowPointer
+	lea esi,IDR_EC_Window1_DATA
+	mov dword ptr [eax],esi
+	invoke Window2Initialize
+	invoke Window3Initialize
+	invoke Window6Initialize
+	invoke Window5Initialize
+	invoke Window4Initialize
+	invoke ECLibCreateWindow,esi,NULL,FALSE,NULL
+	or eax,eax
+	jz L6
+	push IDR_EC_ACCEL_TABLE
+	push App.Instance
+	.if ECLibbUnicode
+		mov eax, LoadAcceleratorsW
+	.else
+		mov eax, LoadAcceleratorsA
+	.endif
+	call eax
+	mov App.Accel,eax
+L2:	invoke ECLibGetMessage,addr msg,NULL,0,0
+	cmp eax,0
+	jle L6
+	invoke ECLibTranslateAccelerator,App.Main,App.Accel,addr msg
+	or eax,eax
+	jnz L2
+	invoke TranslateMessage,addr msg
+	invoke ECLibDispatchMessage,addr msg
+	jmp L2
+L6:	invoke ECLibEndLibrary
+	cmp App.Accel,0
+	je @F
+	invoke DestroyAcceleratorTable,App.Accel
+@@:	mov eax,msg.wParam
+	ret
+ECInitProc ENDP
+
+Include F:\MASM32\MACROS\MACROS.ASM
+include Window1.asm
+
+end start
