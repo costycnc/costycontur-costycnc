@@ -1,0 +1,177 @@
+#include "CostyContur.h"
+
+1                             24	DISCARDABLE	"Res\\Manifest.xml"
+COSTEL16                      ICON	DISCARDABLE	"Res\\costel16.ico"
+COSTEL32                      ICON	DISCARDABLE	"Res\\costel32.ico"
+IMGCOSTY                      BITMAP	DISCARDABLE	"Res\\Costel.bmp"
+IMGMARIUS                     BITMAP	DISCARDABLE	"Res\\Marius.bmp"
+
+IDR_EC_WINDOW1_MENU MENU DISCARDABLE
+BEGIN
+    POPUP "Fisier"
+    BEGIN
+        MENUITEM "Deschide *.bmp",              IDM_WINDOW1_MNUOPENBMP
+        MENUITEM "Deschide *.csm",              IDM_WINDOW1_MNUOPENCSM
+        MENUITEM "Deschide *.nc (G-Code)",      IDM_WINDOW1_MNUOPENGCODE
+        MENUITEM SEPARATOR
+        MENUITEM "Deschide camera web",         IDM_WINDOW1_MNUOPENCAMERA
+        MENUITEM SEPARATOR
+        MENUITEM "Salveaza ca *.bmp",           IDM_WINDOW1_MNUSAVEBMP
+        MENUITEM SEPARATOR
+        MENUITEM "[DIR] \Fisiere",              IDM_WINDOW1_MNUOPENFILEDIR
+        MENUITEM "[APP] CSM Simulator",         IDM_WINDOW1_MNUCSMSIMULATOR
+        MENUITEM "[APP] GCode Editor",          IDM_WINDOW1_MNUGCODEEDITOR
+        MENUITEM SEPARATOR
+        MENUITEM "Iesire [x]",                  IDM_WINDOW1_MNUEXIT
+    END
+    POPUP "Operatii"
+    BEGIN
+        MENUITEM "Copiaza ecran",               IDM_WINDOW1_MNUCOPYSCREEN
+        MENUITEM "Reseteaza",                   IDM_WINDOW1_MNURESETIMAGE, GRAYED
+        MENUITEM "Contureaza",                  IDM_WINDOW1_MNUDOOUTLINE, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "Trimite la CNC",              IDM_WINDOW1_MNUSEND2CNC, GRAYED
+    END
+    POPUP "Editare"
+    BEGIN
+        MENUITEM "Deschide in Paint",           IDM_WINDOW1_MNUSEND2PAINT, GRAYED
+        MENUITEM "Reincarca *.bmp",             IDM_WINDOW1_MNURELOADBMP, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "Inverseaza culorile",         IDM_WINDOW1_MNUINVERTCOLORS, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "Undo",                        IDM_WINDOW1_MNUUNDOMAINIMG, GRAYED
+    END
+    POPUP "Setari"
+    BEGIN
+        MENUITEM "Incarca setari",              IDM_WINDOW1_MNUINCARCASETARI
+        MENUITEM "Salveaza setari",             IDM_WINDOW1_MNUSALVEAZASETARI
+        MENUITEM SEPARATOR
+        MENUITEM "Pixeli lungime ( X )",        IDM_WINDOW1_MNUSETMAXX
+        MENUITEM "Pixeli latime ( Y )",         IDM_WINDOW1_MNUSETMAXY
+        MENUITEM SEPARATOR
+        MENUITEM "Arata setarile",              IDM_WINDOW1_MNUSHOWSETTINGS
+    END
+    POPUP "Optiuni"
+    BEGIN
+        MENUITEM "Tot timpul deasupra",         IDM_WINDOW1_TOGGLETOPMOST
+        MENUITEM SEPARATOR
+        MENUITEM "Comfirma iesirea din aplicatie", IDM_WINDOW1_MNUASKONEXIT
+    END
+    POPUP "Ajutor"
+    BEGIN
+        MENUITEM "Cum se foloseste ?",          IDM_WINDOW1_MNUHOWTOUSE
+        MENUITEM SEPARATOR
+        MENUITEM "Despre autori ?",             IDM_WINDOW1_MNUABOUT
+    END
+END
+
+IDR_EC_WINDOW2_MENU MENU DISCARDABLE
+BEGIN
+    POPUP "Fisier"
+    BEGIN
+        MENUITEM "CSM Simulator.exe",           IDM_WINDOW2_MNUCSMSIMULATOR
+        MENUITEM SEPARATOR
+        MENUITEM "[DIR] \Fisiere",              IDM_WINDOW2_MNUOPENFILEDIR
+        MENUITEM SEPARATOR
+        MENUITEM "Deschide fisier csm (Bytes)", IDM_WINDOW2_MNUOPENBASCOMBYTESFILE, GRAYED
+        MENUITEM "Deschide fisier Bascom",      IDM_WINDOW2_MNUOPENBASCOMFILE, GRAYED
+        MENUITEM "Deschide fisier Gcode",       IDM_WINDOW2_MNUOPENGCODEFILE, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "Inchide [x]",                 IDM_WINDOW2_MNUCLOSE
+    END
+    POPUP "Editare"
+    BEGIN
+        MENUITEM "Reincarca",                   IDM_WINDOW2_MNURELOADIMG
+        MENUITEM SEPARATOR
+        MENUITEM "Deschide in Paint",           IDM_WINDOW2_MNUSEND2PAINT
+        MENUITEM SEPARATOR
+        MENUITEM "[+] indent (10px)",           IDM_WINDOW2_MNUADDINDENT
+        MENUITEM "[-] indent (10px)",           IDM_WINDOW2_MNUSUBINDENT, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "Undo",                        IDM_WINDOW2_MNUUNDO
+    END
+    POPUP "Port"
+    BEGIN
+        MENUITEM "Porneste CNC",                IDM_WINDOW2_MNUPORNESTECNC
+        MENUITEM SEPARATOR
+        MENUITEM "Conecteaza",                  IDM_WINDOW2_MNUCONNPORT
+        MENUITEM "Deconecteaza",                IDM_WINDOW2_MNUDECONNPORT
+    END
+    POPUP "Simulari"
+    BEGIN
+        MENUITEM "Interpreteaza",               IDM_WINDOW2_MNUSTARTINTERPRETOR
+        MENUITEM SEPARATOR
+        MENUITEM "CNC Test",                    IDM_WINDOW2_MNUCNCTEST
+    END
+    POPUP "Setari"
+    BEGIN
+        MENUITEM "Incarca setari",              IDM_WINDOW2_MNUINCARCASETARI
+        MENUITEM "Salveaza setari",             IDM_WINDOW2_MNUSALVEAZASETARI
+        MENUITEM SEPARATOR
+        MENUITEM "Sleep - milisecs",            IDM_WINDOW2_MNUSLEEP
+        MENUITEM "Sleep (Cnc Test) - milisecs", IDM_WINDOW2_MNUSLEEPCNCTEST
+        MENUITEM SEPARATOR
+        MENUITEM "Pasi / pixel X",              IDM_WINDOW2_MNUPASIPERPIXELX
+        MENUITEM "Pasi / pixel Y",              IDM_WINDOW2_MNUPASIPERPIXELY
+        MENUITEM SEPARATOR
+        MENUITEM "Arata setarile",              IDM_WINDOW2_MNUARATASETARI
+    END
+END
+
+IDR_EC_WINDOW6_MENU MENU DISCARDABLE
+BEGIN
+    POPUP "Fisier"
+    BEGIN
+        MENUITEM "Activeaza camera        F5",  IDM_WINDOW6_MNUACTIVEAZA
+        MENUITEM "Inchide camera            F7", IDM_WINDOW6_MNUCLOSE, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "Inchide [ x ]                 Shift + Esc", IDM_WINDOW6_MNUINCHIDE
+    END
+    POPUP "Edit"
+    BEGIN
+        MENUITEM "Salveaza *.bmp            F2", IDM_WINDOW6_MNUSAVE, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "Trimite la prelucrare      F1", IDM_WINDOW6_MNUSEND2MAIN, GRAYED
+    END
+    POPUP "Setari"
+    BEGIN
+        MENUITEM "Seteaza director bmp    F12", IDM_WINDOW6_MNUSETSAVEPATH
+        MENUITEM SEPARATOR
+        MENUITEM "Seteaza camera             F8", IDM_WINDOW6_MNUSETCAMERASETTINGS, GRAYED
+    END
+    POPUP "Info"
+    BEGIN
+        MENUITEM "./tCam.bmp",                  IDM_WINDOW6_MNUSAVEFILE, CHECKED
+    END
+END
+
+
+IDR_VERSION VERSIONINFO
+ FILEVERSION 1,0,0,0
+ PRODUCTVERSION 1,0,0,0
+ FILEFLAGSMASK 0x3L
+ FILEFLAGS 0x1L
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904E4"
+        BEGIN
+            VALUE "Comments", "Programmed in assembly with Easy Code\0"
+            VALUE "CompanyName", "CostyCNC\0"
+            VALUE "FileDescription", "Aplicatie pentru utilizarea CNC-ul facut de Boboaca Costel\0"
+            VALUE "FileVersion", "1.00.0.0000\0"
+            VALUE "InternalName", "CostyContur\0"
+            VALUE "LegalCopyright", "Copyright © 2012 CostyCNC\0"
+            VALUE "OriginalFilename", "CostyContur.exe\0"
+            VALUE "ProductName", "CostyContur\0"
+            VALUE "ProductVersion", "1.00.0.0000\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0409, 1252
+    END
+END
